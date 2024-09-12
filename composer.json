@@ -1,5 +1,5 @@
 {
-    "name": "fullhaus/coding-standards",
+    "name": "fullhaus/php-cs-fixer-fullhaus",
     "type": "library",
     "require": {
         "vendor/friendsofphp/php-cs-fixer": "^3.64"
