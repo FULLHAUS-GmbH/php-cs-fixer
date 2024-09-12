@@ -2,10 +2,10 @@
     "name": "fullhaus/php-cs-fixer-fullhaus",
     "type": "library",
     "require": {
-        "vendor/friendsofphp/php-cs-fixer": "^3.64"
+        "friendsofphp/php-cs-fixer": "^3.64"
     },
     "require-dev": {
-        "vendor/ergebnis/composer-normalize": "^2.43"
+        "ergebnis/composer-normalize": "^2.43"
     },
     "autoload": {
         "psr-4": {
