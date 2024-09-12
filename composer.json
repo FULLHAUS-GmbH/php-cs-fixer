@@ -1,0 +1,20 @@
+{
+    "name": "fullhaus/coding-standards",
+    "type": "library",
+    "require": {
+        "vendor/friendsofphp/php-cs-fixer": "^3.64"
+    },
+    "require-dev": {
+        "vendor/ergebnis/composer-normalize": "^2.43"
+    },
+    "autoload": {
+        "psr-4": {
+            "FULLHAUS\\CodingStandards\\": "src/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true
+        }
+    }
+}
