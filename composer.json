@@ -1,6 +1,10 @@
 {
     "name": "fullhaus/php-cs-fixer-fullhaus",
+    "description": "Default PHP-CS-Fixer configuration for FULLHAUS projects.",
     "type": "library",
+    "homepage" : "https://www.fullhaus.de/",
+    "readme": "README.md",
+    "license": "MIT",
     "require": {
         "friendsofphp/php-cs-fixer": "^3.64"
     },
