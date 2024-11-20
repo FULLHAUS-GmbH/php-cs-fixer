@@ -6,7 +6,8 @@
     "readme": "README.md",
     "license": "MIT",
     "require": {
-        "friendsofphp/php-cs-fixer": "^3.64"
+        "friendsofphp/php-cs-fixer": "^3.64",
+        "php": ">=8.0"
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.43"
