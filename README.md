@@ -9,16 +9,16 @@ Follow these steps to integrate the FULLHAUS PHP-CS-Fixer into your project:
 1. Add the repository to the `repositories` field in your `composer.json`:
     ```json
     "repositories": {
-        "fullhaus/php-cs-fixer-fullhaus": {
+        "fullhaus/php-cs-fixer": {
             "type": "vcs",
-            "url": "git@github.com:FULLHAUS-GmbH/php-cs-fixer-fullhaus.git"
+            "url": "git@github.com:FULLHAUS-GmbH/php-cs-fixer.git"
         }
     }
     ```
 
 2. Require the package using composer:
     ```shell
-    composer require fullhaus/php-cs-fixer-fullhaus:dev-main --dev
+    composer require fullhaus/php-cs-fixer:@dev --dev
     ```
 
 3. Create or update your `.php-cs-fixer.dist.php`
