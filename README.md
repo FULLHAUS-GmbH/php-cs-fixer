@@ -33,8 +33,8 @@ Follow these steps to integrate the FULLHAUS PHP-CS-Fixer into your project:
     return $config;
     ```
 
-   > [!TIP]
-   > For TYPO3 projects, adjust the directory to `$config->getFinder()->in(__DIR__ . '/packages');`.
+   
+   > **NOTE:** For TYPO3 projects, adjust the directory to `$config->getFinder()->in(__DIR__ . '/packages');`.
 
 4. Add the following snippet to your root `composer.json`:
    ```
