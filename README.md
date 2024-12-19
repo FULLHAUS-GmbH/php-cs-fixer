@@ -21,7 +21,7 @@ Follow these steps to integrate the FULLHAUS PHP-CS-Fixer into your project:
     composer require fullhaus/php-cs-fixer:dev-main --dev
     ```
 
-3. Create or update your `.php-cs-fixer.dist.php`
+3. Create or update your `.php-cs-fixer.php`
     ```php
    <?php
 
@@ -42,7 +42,7 @@ Follow these steps to integrate the FULLHAUS PHP-CS-Fixer into your project:
       "fix:php": [
          "@fix:php:cs"
       ],
-      "fix:php:cs": "php-cs-fixer fix --config .php-cs-fixer.dist.php"
+      "fix:php:cs": "php-cs-fixer fix --config .php-cs-fixer.php"
    },
    ```
 
