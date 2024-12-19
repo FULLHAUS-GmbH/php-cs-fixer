@@ -21,7 +21,7 @@ Follow these steps to integrate the FULLHAUS PHP-CS-Fixer into your project:
     composer require fullhaus/php-cs-fixer:dev-main --dev
     ```
 
-3. Create or update your `.php-cs-fixer.dist.php`
+3. Create or update your `.php-cs-fixer.php`
     ```php
    <?php
 
@@ -32,6 +32,20 @@ Follow these steps to integrate the FULLHAUS PHP-CS-Fixer into your project:
 
     return $config;
     ```
+
+   > **NOTE:** For TYPO3 projects, adjust the directory to `$config->getFinder()->in(__DIR__ . '/packages');`.
+
+4. Add the following snippet to your root `composer.json`:
+   ```json
+   "scripts": {
+      "fix:php": [
+         "@fix:php:cs"
+      ],
+      "fix:php:cs": "php-cs-fixer fix --config .php-cs-fixer.php"
+   },
+   ```
+
+   > ATTENTION: Beware of copy🍝! There might be an existing `scripts` section in your composer.json already. In this case copy the cs-fixer scripts **only**, if not in there, yet. Anyways, IDE will complain about duplicate associative keys.
 
 ## License
 
