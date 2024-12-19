@@ -33,6 +33,19 @@ Follow these steps to integrate the FULLHAUS PHP-CS-Fixer into your project:
     return $config;
     ```
 
+   > [!TIP]
+   > For TYPO3 projects, adjust the directory to `$config->getFinder()->in(__DIR__ . '/packages');`.
+
+4. Add the following snippet to your root `composer.json`:
+   ```
+   "scripts": {
+      "fix:php": [
+         "@fix:php:cs"
+      ],
+      "fix:php:cs": "php-cs-fixer fix --config .php-cs-fixer.dist.php"
+   },
+   ```
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
