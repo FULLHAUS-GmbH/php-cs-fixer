@@ -18,7 +18,7 @@ Follow these steps to integrate the FULLHAUS PHP-CS-Fixer into your project:
 
 2. Require the package using composer:
     ```shell
-    composer require fullhaus/php-cs-fixer:@dev --dev
+    composer require fullhaus/php-cs-fixer:dev-main --dev
     ```
 
 3. Create or update your `.php-cs-fixer.dist.php`
