@@ -33,7 +33,6 @@ Follow these steps to integrate the FULLHAUS PHP-CS-Fixer into your project:
     return $config;
     ```
 
-   
    > **NOTE:** For TYPO3 projects, adjust the directory to `$config->getFinder()->in(__DIR__ . '/packages');`.
 
 4. Add the following snippet to your root `composer.json`:
@@ -46,7 +45,7 @@ Follow these steps to integrate the FULLHAUS PHP-CS-Fixer into your project:
    },
    ```
 
-> ATTENTION: Beware of copy🍝! There might be an existing `scripts` section in your composer.json already. In this case copy the cs-fixer scripts **only**, if not in there, yet. Anyways, IDE will complain about duplicate associative keys.
+   > ATTENTION: Beware of copy🍝! There might be an existing `scripts` section in your composer.json already. In this case copy the cs-fixer scripts **only**, if not in there, yet. Anyways, IDE will complain about duplicate associative keys.
 
 ## License
 
