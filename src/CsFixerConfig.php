@@ -46,6 +46,7 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
         'modernize_strpos' => true,
         'modernize_types_casting' => true,
         'native_function_casing' => true,
+        'new_with_parentheses' => true,
         'no_alias_functions' => true,
         'no_blank_lines_after_phpdoc' => true,
         'no_empty_phpdoc' => true,
@@ -61,6 +62,7 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
         'no_unused_imports' => true,
         'no_useless_else' => true,
         'no_useless_nullsafe_operator' => true,
+        'nullable_type_declaration_for_default_null_value' => true,
         'ordered_imports' => [ 'imports_order' => [ 'class', 'function', 'const' ], 'sort_algorithm' => 'alpha' ],
         'php_unit_construct' => [ 'assertions' => [ 'assertEquals', 'assertSame', 'assertNotEquals', 'assertNotSame' ] ],
         'php_unit_mock_short_will_return' => true,
@@ -80,6 +82,7 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
         'single_line_empty_body' => true,
         'trailing_comma_in_multiline' => [ 'elements' => [ 'arguments', 'arrays', 'match', 'parameters' ] ],
         'whitespace_after_comma_in_array' => [ 'ensure_single_space' => true ],
+        'type_declaration_spaces' => true,
         'yoda_style' => [ 'equal' => false, 'identical' => false, 'less_and_greater' => false ],
     ];
 
