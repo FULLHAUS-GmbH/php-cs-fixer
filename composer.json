@@ -6,11 +6,11 @@
     "readme": "README.md",
     "license": "MIT",
     "require": {
-        "friendsofphp/php-cs-fixer": "^3.64",
+        "friendsofphp/php-cs-fixer": "^3.68.1",
         "php": ">=8.0"
     },
     "require-dev": {
-        "ergebnis/composer-normalize": "^2.43"
+        "ergebnis/composer-normalize": "^2.45"
     },
     "autoload": {
         "psr-4": {
