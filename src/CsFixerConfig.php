@@ -175,16 +175,21 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
             ->setRiskyAllowed(true)
             ->setRules(static::$fullhausRules);
         $static->getFinder()
-            ->exclude([
-                '.build',
-                'typo3temp',
-                'var',
-                'vendor',
-            ])
+            ->exclude(
+                [
+                    '.build',
+                    '.Build',
+                    'typo3temp',
+                    'var',
+                    'vendor',
+                ],
+            )
             ->ignoreVCSIgnored(true)
-            ->notPath([
-                'config/system/settings.php',
-            ]);
+            ->notPath(
+                [
+                    'config/system/settings.php',
+                ],
+            );
 
         return $static;
     }
