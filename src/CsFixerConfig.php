@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * This file is part of the FULLHAUS PHP-CS-Fixer configuration.
  *
- * (c) 2024 FULLHAUS GmbH
+ * (c) 2024-2025 FULLHAUS GmbH
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
@@ -26,19 +26,40 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
         // @todo: Switch to @PER-CS2.0 once php-cs-fixer's todo list is done: https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues/7247
         '@PER-CS1.0' => true,
         'array_indentation' => true,
-        'array_syntax' => [ 'syntax' => 'short' ],
-        'cast_spaces' => [ 'space' => 'none' ],
+        'array_syntax' => [
+            'syntax' => 'short',
+        ],
+        'cast_spaces' => [
+            'space' => 'none',
+        ],
         // @todo: Can be dropped once we enable @PER-CS2.0
-        'concat_space' => [ 'spacing' => 'one' ],
-        'declare_equal_normalize' => [ 'space' => 'none' ],
+        'concat_space' => [
+            'spacing' => 'one',
+        ],
+        'declare_equal_normalize' => [
+            'space' => 'none',
+        ],
         'declare_parentheses' => true,
         'dir_constant' => true,
         // @todo: Can be dropped once we enable @PER-CS2.0
         'function_declaration' => [
             'closure_fn_spacing' => 'none',
         ],
-        'function_to_constant' => [ 'functions' => [ 'get_called_class', 'get_class', 'get_class_this', 'php_sapi_name', 'phpversion', 'pi' ] ],
-        'global_namespace_import' => [ 'import_classes' => false, 'import_constants' => false, 'import_functions' => false ],
+        'function_to_constant' => [
+            'functions' => [
+                'get_called_class',
+                'get_class',
+                'get_class_this',
+                'php_sapi_name',
+                'phpversion',
+                'pi',
+            ],
+        ],
+        'global_namespace_import' => [
+            'import_classes' => false,
+            'import_constants' => false,
+            'import_functions' => false,
+        ],
         'list_syntax' => [ 'syntax' => 'short' ],
         // @todo: Can be dropped once we enable @PER-CS2.0
         'method_argument_space' => true,
@@ -65,7 +86,7 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
                 'switch',
                 'throw',
                 'use',
-                'use_trait'
+                'use_trait',
             ],
         ],
         'no_leading_namespace_whitespace' => true,
@@ -79,27 +100,65 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
         'no_useless_else' => true,
         'no_useless_nullsafe_operator' => true,
         'nullable_type_declaration_for_default_null_value' => true,
-        'ordered_imports' => [ 'imports_order' => [ 'class', 'function', 'const' ], 'sort_algorithm' => 'alpha' ],
-        'php_unit_construct' => [ 'assertions' => [ 'assertEquals', 'assertSame', 'assertNotEquals', 'assertNotSame' ] ],
+        'ordered_imports' => [
+            'imports_order' => [
+                'class',
+                'function',
+                'const',
+            ],
+            'sort_algorithm' => 'alpha',
+        ],
+        'php_unit_construct' => [
+            'assertions' => [
+                'assertEquals',
+                'assertSame',
+                'assertNotEquals',
+                'assertNotSame',
+            ],
+        ],
         'php_unit_mock_short_will_return' => true,
-        'php_unit_test_case_static_method_calls' => [ 'call_type' => 'self' ],
+        'php_unit_test_case_static_method_calls' => [
+            'call_type' => 'self',
+        ],
         'phpdoc_no_access' => true,
         'phpdoc_no_empty_return' => true,
         'phpdoc_no_package' => true,
         'phpdoc_scalar' => true,
         'phpdoc_trim' => true,
         'phpdoc_types' => true,
-        'phpdoc_types_order' => [ 'null_adjustment' => 'always_last', 'sort_algorithm' => 'none' ],
-        'return_type_declaration' => [ 'space_before' => 'none' ],
+        'phpdoc_types_order' => [
+            'null_adjustment' => 'always_last',
+            'sort_algorithm' => 'none',
+        ],
+        'return_type_declaration' => [
+            'space_before' => 'none',
+        ],
         'single_quote' => true,
         'single_space_around_construct' => true,
-        'single_line_comment_style' => [ 'comment_types' => [ 'hash' ] ],
+        'single_line_comment_style' => [
+            'comment_types' => [
+                'hash',
+            ],
+        ],
         // @todo: Can be dropped once we enable @PER-CS2.0
         'single_line_empty_body' => true,
-        'trailing_comma_in_multiline' => [ 'elements' => [ 'arguments', 'arrays', 'match', 'parameters' ] ],
-        'whitespace_after_comma_in_array' => [ 'ensure_single_space' => true ],
+        'trailing_comma_in_multiline' => [
+            'elements' => [
+                'arguments',
+                'arrays',
+                'match',
+                'parameters',
+            ],
+        ],
+        'whitespace_after_comma_in_array' => [
+            'ensure_single_space' => true,
+        ],
         'type_declaration_spaces' => true,
-        'yoda_style' => [ 'equal' => false, 'identical' => false, 'less_and_greater' => false ],
+        'yoda_style' => [
+            'equal' => false,
+            'identical' => false,
+            'less_and_greater' => false,
+        ],
     ];
 
     public function __construct(string $name = 'FULLHAUS')
@@ -113,8 +172,7 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
         $static
             ->setParallelConfig(\PhpCsFixer\Runner\Parallel\ParallelConfigFactory::detect())
             ->setRiskyAllowed(true)
-            ->setRules(static::$fullhausRules)
-        ;
+            ->setRules(static::$fullhausRules);
         $static->getFinder()
             ->exclude([
                 '.build',
@@ -125,8 +183,7 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
             ->ignoreVCSIgnored(true)
             ->notPath([
                 'config/system/settings.php',
-            ])
-        ;
+            ]);
 
         return $static;
     }
