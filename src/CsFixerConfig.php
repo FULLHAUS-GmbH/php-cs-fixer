@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace FULLHAUS\CodingStandards;
 
 use PhpCsFixer\Config;
+use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
 
 class CsFixerConfig extends Config implements CsFixerConfigInterface
 {
@@ -170,7 +171,7 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
     {
         $static = new static();
         $static
-            ->setParallelConfig(\PhpCsFixer\Runner\Parallel\ParallelConfigFactory::detect())
+            ->setParallelConfig(ParallelConfigFactory::detect())
             ->setRiskyAllowed(true)
             ->setRules(static::$fullhausRules);
         $static->getFinder()
