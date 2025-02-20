@@ -30,6 +30,28 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
         'array_syntax' => [
             'syntax' => 'short',
         ],
+        'blank_line_before_statement' => [
+            'statements' => [
+                'break',
+                'case',
+                'continue',
+                'declare',
+                'default',
+                'exit',
+                'goto',
+                'include',
+                'include_once',
+                'phpdoc',
+                'require',
+                'require_once',
+                'return',
+                'switch',
+                'throw',
+                'try',
+                'yield',
+                'yield_from',
+            ],
+        ],
         'cast_spaces' => [
             'space' => 'none',
         ],
