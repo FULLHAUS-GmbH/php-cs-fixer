@@ -78,6 +78,10 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
                 'pi',
             ],
         ],
+        'fully_qualified_strict_types' => [
+            'import_symbols' => true,
+            'leading_backslash_in_global_namespace' => true,
+        ],
         'global_namespace_import' => [
             'import_classes' => false,
             'import_constants' => false,
