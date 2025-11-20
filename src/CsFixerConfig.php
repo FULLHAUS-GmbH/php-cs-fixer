@@ -24,12 +24,13 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
      */
     protected static array $fullhausRules = [
         '@DoctrineAnnotation' => true,
-        // @todo: Switch to @PER-CS2.0 once php-cs-fixer's todo list is done: https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues/7247
-        '@PER-CS1.0' => true,
+        // @todo: Switch to @PER-CS2x0 once php-cs-fixer's todo list is done: https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues/7247
+        '@PER-CS1x0' => true,
         'array_indentation' => true,
         'array_syntax' => [
             'syntax' => 'short',
         ],
+        'assign_null_coalescing_to_coalesce_equal' => true,
         'blank_line_before_statement' => [
             'statements' => [
                 'break',
@@ -37,8 +38,12 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
                 'continue',
                 'declare',
                 'default',
+                'do',
                 'exit',
+                'for',
+                'foreach',
                 'goto',
+                'if',
                 'include',
                 'include_once',
                 'phpdoc',
@@ -48,6 +53,7 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
                 'switch',
                 'throw',
                 'try',
+                'while',
                 'yield',
                 'yield_from',
             ],
@@ -55,7 +61,7 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
         'cast_spaces' => [
             'space' => 'none',
         ],
-        // @todo: Can be dropped once we enable @PER-CS2.0
+        // @todo: Can be dropped once we enable @PER-CS2x0
         'concat_space' => [
             'spacing' => 'one',
         ],
@@ -64,7 +70,7 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
         ],
         'declare_parentheses' => true,
         'dir_constant' => true,
-        // @todo: Can be dropped once we enable @PER-CS2.0
+        // @todo: Can be dropped once we enable @PER-CS2x0
         'function_declaration' => [
             'closure_fn_spacing' => 'none',
         ],
@@ -88,7 +94,7 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
             'import_functions' => false,
         ],
         'list_syntax' => [ 'syntax' => 'short' ],
-        // @todo: Can be dropped once we enable @PER-CS2.0
+        // @todo: Can be dropped once we enable @PER-CS2x0
         'method_argument_space' => true,
         'modernize_strpos' => true,
         'modernize_types_casting' => true,
@@ -103,6 +109,7 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
                 'attribute',
                 'break',
                 'case',
+                'comma',
                 'continue',
                 'curly_brace_block',
                 'default',
@@ -130,6 +137,14 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
             'syntax' => 'union',
         ],
         'nullable_type_declaration_for_default_null_value' => true,
+        'ordered_class_elements' => [
+            'order' => [
+                'use_trait',
+                'case',
+                'constant',
+                'property',
+            ],
+        ],
         'ordered_imports' => [
             'imports_order' => [
                 'class',
@@ -149,6 +164,22 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
         'php_unit_mock_short_will_return' => true,
         'php_unit_test_case_static_method_calls' => [
             'call_type' => 'self',
+            'methods' => [
+                'any' => 'this',
+                'atLeast' => 'this',
+                'atLeastOnce' => 'this',
+                'atMost' => 'this',
+                'exactly' => 'this',
+                'never' => 'this',
+                'onConsecutiveCalls' => 'this',
+                'once' => 'this',
+                'returnArgument' => 'this',
+                'returnCallback' => 'this',
+                'returnSelf' => 'this',
+                'returnValue' => 'this',
+                'returnValueMap' => 'this',
+                'throwException' => 'this',
+            ],
         ],
         'phpdoc_no_access' => true,
         'phpdoc_no_empty_return' => true,
@@ -170,8 +201,10 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
                 'hash',
             ],
         ],
-        // @todo: Can be dropped once we enable @PER-CS2.0
+        // @todo: Can be dropped once we enable @PER-CS2x0
         'single_line_empty_body' => true,
+        'simplified_null_return' => true,
+        'ternary_to_null_coalescing' => true,
         'trailing_comma_in_multiline' => [
             'elements' => [
                 'arguments',
@@ -180,10 +213,17 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
                 'parameters',
             ],
         ],
+        'unary_operator_spaces' => true,
         'whitespace_after_comma_in_array' => [
             'ensure_single_space' => true,
         ],
-        'type_declaration_spaces' => true,
+        'type_declaration_spaces' => [
+            'elements' => [
+                'constant',
+                'function',
+                'property',
+            ],
+        ],
         'yoda_style' => [
             'equal' => false,
             'identical' => false,
