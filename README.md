@@ -66,16 +66,12 @@ declare(strict_types=1);
 $config = FULLHAUS\CodingStandards\CsFixerConfig::create();
 
 // Enable header comment
-$config->enableHeaderComment(`
-▄▄   ▄▄  ▄▄▄▄▄      ▄▄▄  ▄▄▄▄   ▄▄▄▄▄
-██▄█▄██  ██▄▄      ██ ██ ██ ██  ██▄▄ 
-██▀ ▀██  ██▄▄▄     ██▀██ ██▀█▄  ██▄▄▄+
-
-██▀▀▀▀  ██  ██  ██      ██      █   █  ▄▀▀▀▄  █   █  ▄▀▀▀▄
-██▄▄▄   ██  ██  ██      ██      █▄▄▄█  █▄▄▄█  █   █  ▀▄▄▄ 
-██      ██  ██  ██      ██      █   █  █   █  █   █  ▄   █
-▀▀       ▀▀▀▀   ▀▀▀▀▀▀  ▀▀▀▀▀▀  ▀   ▀  ▀   ▀   ▀▀▀    ▀▀▀ 
-`);
+$config->enableHeaderComment(
+    "This file is part of the MyProject package.\n\n" .
+    "(c) 2024-2025 FULLHAUS GmbH\n\n" .
+    "For the full copyright and license information, please view\n" .
+    "the LICENSE file that was distributed with this source code."
+);
 
 $config->getFinder()->in(__DIR__ . '/src');
 
@@ -89,6 +85,7 @@ return $config;
 - ✅ Enable/disable per project
 - ✅ Control header placement and spacing
 - ✅ Automatic header management (add/update/remove)
+- ✅ Available variables: `{package_name}`, `{year}`
 
 **Monorepo example with automatic detection:**
 ```php
