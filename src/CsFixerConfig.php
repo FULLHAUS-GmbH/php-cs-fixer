@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace FULLHAUS\CodingStandards;
 
+use FULLHAUS\CodingStandards\Fixer\HeaderCommentFixer;
 use PhpCsFixer\Config;
 use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
 
@@ -242,7 +243,10 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
         $static
             ->setParallelConfig(ParallelConfigFactory::detect())
             ->setRiskyAllowed(true)
-            ->setRules(static::$fullhausRules);
+            ->setRules(static::$fullhausRules)
+            ->registerCustomFixers([
+                new HeaderCommentFixer(),
+            ]);
         $static->getFinder()
             ->exclude(
                 [
@@ -272,5 +276,51 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
         $this->setRules($rules);
 
         return $this;
+    }
+
+    /**
+     * Configure the header comment for mono repo projects.
+     *
+     * @param array<string, mixed> $config Configuration options for the header comment:
+     *                                     - enabled: bool (default: true)
+     *                                     - header: string (the header text)
+     *                                     - location: 'after_open'|'after_declare_strict' (default: 'after_declare_strict')
+     *                                     - separate: 'both'|'top'|'bottom'|'none' (default: 'both')
+     *                                     - comment_type: 'comment'|'PHPDoc' (default: 'comment')
+     */
+    public function setHeaderComment(array $config): static
+    {
+        $rules = $this->getRules();
+        $rules['FULLHAUS/header_comment'] = $config;
+        $this->setRules($rules);
+
+        return $this;
+    }
+
+    /**
+     * Enable the header comment fixer with a simple header text.
+     *
+     * @param string $header The header text (will be wrapped in comment block automatically)
+     * @param string $location Where to place the header (default: 'after_declare_strict')
+     */
+    public function enableHeaderComment(string $header, string $location = 'after_declare_strict'): static
+    {
+        return $this->setHeaderComment([
+            'enabled' => true,
+            'header' => $header,
+            'location' => $location,
+            'separate' => 'both',
+            'comment_type' => 'comment',
+        ]);
+    }
+
+    /**
+     * Disable the header comment fixer.
+     */
+    public function disableHeaderComment(): static
+    {
+        return $this->setHeaderComment([
+            'enabled' => false,
+        ]);
     }
 }
