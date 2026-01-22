@@ -1,6 +1,6 @@
 # FULLHAUS PHP-CS-Fixer Config
 
-![Tests](https://github.com/FULLHAUS-GmbH/php-cs-fixer/workflows/Tests/badge.svg)
+[![Tests](https://github.com/FULLHAUS-GmbH/php-cs-fixer/workflows/Tests/badge.svg)](https://github.com/FULLHAUS-GmbH/php-cs-fixer/actions/workflows/tests.yml)
 
 This repository contains the PHP-CS-Fixer configuration used for projects maintained by [**FULL**HAUS](https://www.fullhaus.de/).
 
