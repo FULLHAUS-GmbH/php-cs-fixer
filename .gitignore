@@ -8,6 +8,10 @@
 # Local config See: https://cs.symfony.com/doc/config.html
 .php-cs-fixer.php
 
+# PHPUnit
+.phpunit.cache/
+coverage/
+
 ### Composer template
 composer.phar
 /vendor/
