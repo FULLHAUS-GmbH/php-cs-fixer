@@ -5,12 +5,11 @@ declare(strict_types=1);
 /*
  * This file is part of the FULLHAUS PHP-CS-Fixer configuration.
  *
- * (c) 2024-2025 FULLHAUS GmbH
+ * (c) 2024-2026 FULLHAUS GmbH
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
-
 
 namespace FULLHAUS\CodingStandards;
 
@@ -160,6 +159,10 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
                 'assertNotEquals',
                 'assertNotSame',
             ],
+        ],
+        'ordered_types' => [
+            'null_adjustment' => 'always_last',
+            'sort_algorithm' => 'alpha',
         ],
         'php_unit_mock_short_will_return' => true,
         'php_unit_test_case_static_method_calls' => [
