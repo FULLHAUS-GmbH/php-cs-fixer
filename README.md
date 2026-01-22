@@ -1,5 +1,7 @@
 # FULLHAUS PHP-CS-Fixer Config
 
+![Tests](https://github.com/FULLHAUS-GmbH/php-cs-fixer/workflows/Tests/badge.svg)
+
 This repository contains the PHP-CS-Fixer configuration used for projects maintained by [**FULL**HAUS](https://www.fullhaus.de/).
 
 ## Installation
@@ -46,6 +48,39 @@ Follow these steps to integrate the FULLHAUS PHP-CS-Fixer into your project:
    ```
 
    > ATTENTION: Beware of copy🍝! There might be an existing `scripts` section in your composer.json already. In this case copy the cs-fixer scripts **only**, if not in there, yet. Anyways, IDE will complain about duplicate associative keys.
+
+## Testing
+
+This package includes comprehensive tests to validate the PHP-CS-Fixer configuration and ensure code style rules are working correctly.
+
+### Running Tests
+
+```bash
+# Run all tests
+composer test
+
+# Run tests with coverage report
+composer test:coverage
+```
+
+The test suite includes:
+- **Unit tests** for the configuration class
+- **Style validation tests** that verify individual fixer rules
+- **Integration tests** with example files
+- **Fixture files** demonstrating good and bad coding practices
+
+See [tests/README.md](tests/README.md) for detailed information about the test structure and what is tested.
+
+## Continuous Integration
+
+This package uses GitHub Actions to automatically run tests on every push and pull request. The workflow:
+
+- Tests on PHP 8.0, 8.1, 8.2, and 8.3
+- Validates composer.json
+- Runs the complete test suite
+- Checks code style compliance
+
+See [.github/workflows/tests.yml](.github/workflows/tests.yml) for the complete workflow configuration.
 
 ## License
 
