@@ -19,10 +19,24 @@ use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
 
 class CsFixerConfig extends Config implements CsFixerConfigInterface
 {
+    private const DEFAULT_NAME = 'FULLHAUS';
+
+    private const EXCLUDED_DIRECTORIES = [
+        '.build',
+        '.Build',
+        'typo3temp',
+        'var',
+        'vendor',
+    ];
+
+    private const EXCLUDED_PATHS = [
+        'config/system/settings.php',
+    ];
+
     /**
      * @var array<string, array<string, mixed>|bool>
      */
-    protected static array $fullhausRules = [
+    protected const RULES = [
         '@DoctrineAnnotation' => true,
         // @todo: Switch to @PER-CS2x0 once php-cs-fixer's todo list is done: https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues/7247
         '@PER-CS1x0' => true,
@@ -93,7 +107,9 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
             'import_constants' => false,
             'import_functions' => false,
         ],
-        'list_syntax' => [ 'syntax' => 'short' ],
+        'list_syntax' => [
+            'syntax' => 'short',
+        ],
         // @todo: Can be dropped once we enable @PER-CS2x0
         'method_argument_space' => true,
         'modernize_strpos' => true,
@@ -153,6 +169,11 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
             ],
             'sort_algorithm' => 'alpha',
         ],
+        'ordered_types' => [
+            'case_sensitive' => true,
+            'null_adjustment' => 'always_last',
+            'sort_algorithm' => 'alpha',
+        ],
         'php_unit_construct' => [
             'assertions' => [
                 'assertEquals',
@@ -160,11 +181,6 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
                 'assertNotEquals',
                 'assertNotSame',
             ],
-        ],
-        'ordered_types' => [
-            'case_sensitive' => true,
-            'null_adjustment' => 'always_last',
-            'sort_algorithm' => 'alpha',
         ],
         'php_unit_mock_short_will_return' => true,
         'php_unit_test_case_static_method_calls' => [
@@ -199,8 +215,7 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
         'return_type_declaration' => [
             'space_before' => 'none',
         ],
-        'single_quote' => true,
-        'single_space_around_construct' => true,
+        'simplified_null_return' => true,
         'single_line_comment_style' => [
             'comment_types' => [
                 'hash',
@@ -208,7 +223,8 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
         ],
         // @todo: Can be dropped once we enable @PER-CS2x0
         'single_line_empty_body' => true,
-        'simplified_null_return' => true,
+        'single_quote' => true,
+        'single_space_around_construct' => true,
         'ternary_to_null_coalescing' => true,
         'trailing_comma_in_multiline' => [
             'elements' => [
@@ -218,16 +234,16 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
                 'parameters',
             ],
         ],
-        'unary_operator_spaces' => true,
-        'whitespace_after_comma_in_array' => [
-            'ensure_single_space' => true,
-        ],
         'type_declaration_spaces' => [
             'elements' => [
                 'constant',
                 'function',
                 'property',
             ],
+        ],
+        'unary_operator_spaces' => true,
+        'whitespace_after_comma_in_array' => [
+            'ensure_single_space' => true,
         ],
         'yoda_style' => [
             'equal' => false,
@@ -236,39 +252,28 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
         ],
     ];
 
-    public function __construct(string $name = 'FULLHAUS')
+    public function __construct(string $name = self::DEFAULT_NAME)
     {
         parent::__construct($name);
     }
 
     public static function create(): static
     {
-        $static = new static();
-        $static
+        $config = new static();
+        $config
             ->setParallelConfig(ParallelConfigFactory::detect())
             ->setRiskyAllowed(true)
             ->registerCustomFixers([ new ArraySpacingFixer() ])
-            ->setRules(array_merge(static::$fullhausRules, [
+            ->setRules(array_merge(static::RULES, [
                 'FULLHAUS/array_spacing' => true,
             ]));
-        $static->getFinder()
-            ->exclude(
-                [
-                    '.build',
-                    '.Build',
-                    'typo3temp',
-                    'var',
-                    'vendor',
-                ],
-            )
-            ->ignoreVCSIgnored(true)
-            ->notPath(
-                [
-                    'config/system/settings.php',
-                ],
-            );
 
-        return $static;
+        $config->getFinder()
+            ->exclude(self::EXCLUDED_DIRECTORIES)
+            ->ignoreVCSIgnored(true)
+            ->notPath(self::EXCLUDED_PATHS);
+
+        return $config;
     }
 
     /**
@@ -276,8 +281,8 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
      */
     public function addRules(array $rules): static
     {
-        $rules = array_replace_recursive($this->getRules(), $rules);
-        $this->setRules($rules);
+        $mergedRules = array_replace_recursive($this->getRules(), $rules);
+        $this->setRules($mergedRules);
 
         return $this;
     }
