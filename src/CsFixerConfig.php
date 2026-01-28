@@ -161,6 +161,7 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
             ],
         ],
         'ordered_types' => [
+            'case_sensitive' => true,
             'null_adjustment' => 'always_last',
             'sort_algorithm' => 'alpha',
         ],

@@ -182,20 +182,20 @@ function test(string|null $value): int|null
     }
 
     /**
-     * Test nullable type with union syntax
+     * Test type order with union syntax
      */
     public function testNullableOrder(): void
     {
         $input = '<?php
 
-function test(null|string $value): null|int
+function test(null|\CallbackFilterIterator|string $value): null|int
 {
     return null;
 }
 ';
         $expected = '<?php
 
-function test(string|null $value): int|null
+function test(\CallbackFilterIterator|string|null $value): int|null
 {
     return null;
 }
