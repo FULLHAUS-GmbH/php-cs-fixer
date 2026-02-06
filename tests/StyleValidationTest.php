@@ -320,12 +320,16 @@ declare(strict_types=1);
 
 $array = [1, 2, 3];
 $another = [\'a\', \'b\'];
+$tooManySpaces = [  \'a\', \'b\'  ];
+$onlySpacesAtEnd = [\'a\', \'b\'  ];
 $empty = [];
 ';
         $expected = '<?php
 
 $array = [ 1, 2, 3 ];
 $another = [ \'a\', \'b\' ];
+$tooManySpaces = [ \'a\', \'b\' ];
+$onlySpacesAtEnd = [ \'a\', \'b\' ];
 $empty = [];
 ';
 
