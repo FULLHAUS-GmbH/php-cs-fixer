@@ -246,7 +246,7 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
         $static
             ->setParallelConfig(ParallelConfigFactory::detect())
             ->setRiskyAllowed(true)
-            ->registerCustomFixers([new ArraySpacingFixer()])
+            ->registerCustomFixers([ new ArraySpacingFixer() ])
             ->setRules(array_merge(static::$fullhausRules, [
                 'FULLHAUS/array_spacing' => true,
             ]));

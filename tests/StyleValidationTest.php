@@ -32,7 +32,7 @@ class StyleValidationTest extends TestCase
         $this->config = CsFixerConfig::create();
         $this->fixerFactory = new FixerFactory();
         $this->fixerFactory->registerBuiltInFixers();
-        $this->fixerFactory->registerCustomFixers([new ArraySpacingFixer()]);
+        $this->fixerFactory->registerCustomFixers([ new ArraySpacingFixer() ]);
 
         // Verwende die Rules aus der tatsächlichen Config
         $ruleSet = new RuleSet($this->config->getRules());

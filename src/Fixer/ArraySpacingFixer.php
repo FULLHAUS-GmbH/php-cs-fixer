@@ -45,7 +45,7 @@ final class ArraySpacingFixer extends AbstractFixer
 
     public function isCandidate(Tokens $tokens): bool
     {
-        return $tokens->isAnyTokenKindsFound([\T_ARRAY, CT::T_ARRAY_SQUARE_BRACE_OPEN]);
+        return $tokens->isAnyTokenKindsFound([ \T_ARRAY, CT::T_ARRAY_SQUARE_BRACE_OPEN ]);
     }
 
     public function getPriority(): int
@@ -57,7 +57,7 @@ final class ArraySpacingFixer extends AbstractFixer
     protected function applyFix(\SplFileInfo $file, Tokens $tokens): void
     {
         for ($index = $tokens->count() - 1; $index >= 0; --$index) {
-            if ($tokens[$index]->isGivenKind([\T_ARRAY, CT::T_ARRAY_SQUARE_BRACE_OPEN])) {
+            if ($tokens[$index]->isGivenKind([ \T_ARRAY, CT::T_ARRAY_SQUARE_BRACE_OPEN ])) {
                 $this->fixArray($tokens, $index);
             }
         }
@@ -79,6 +79,7 @@ final class ArraySpacingFixer extends AbstractFixer
 
         // Check if array is empty
         $nextMeaningfulIndex = $tokens->getNextMeaningfulToken($startIndex);
+
         if ($nextMeaningfulIndex === $endIndex) {
             // Empty array, don't add spaces
             return;
@@ -99,11 +100,11 @@ final class ArraySpacingFixer extends AbstractFixer
         if ($nextToken->isWhitespace()) {
             // Replace with single space if it's not already a single space
             if ($nextToken->getContent() !== ' ') {
-                $tokens[$nextIndex] = new Token([\T_WHITESPACE, ' ']);
+                $tokens[$nextIndex] = new Token([ \T_WHITESPACE, ' ' ]);
             }
         } else {
             // No whitespace, insert a space
-            $tokens->insertAt($nextIndex, new Token([\T_WHITESPACE, ' ']));
+            $tokens->insertAt($nextIndex, new Token([ \T_WHITESPACE, ' ' ]));
             $endIndex++; // Adjust end index since we inserted a token
         }
 
@@ -114,12 +115,11 @@ final class ArraySpacingFixer extends AbstractFixer
         if ($prevToken->isWhitespace()) {
             // Replace with single space if it's not already a single space
             if ($prevToken->getContent() !== ' ') {
-                $tokens[$prevIndex] = new Token([\T_WHITESPACE, ' ']);
+                $tokens[$prevIndex] = new Token([ \T_WHITESPACE, ' ' ]);
             }
         } else {
             // No whitespace, insert a space
-            $tokens->insertAt($endIndex, new Token([\T_WHITESPACE, ' ']));
+            $tokens->insertAt($endIndex, new Token([ \T_WHITESPACE, ' ' ]));
         }
     }
 }
-
