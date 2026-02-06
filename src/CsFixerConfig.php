@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace FULLHAUS\CodingStandards;
 
+use FULLHAUS\CodingStandards\Fixer\ArraySpacingFixer;
 use PhpCsFixer\Config;
 use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
 
@@ -245,7 +246,10 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
         $static
             ->setParallelConfig(ParallelConfigFactory::detect())
             ->setRiskyAllowed(true)
-            ->setRules(static::$fullhausRules);
+            ->registerCustomFixers([new ArraySpacingFixer()])
+            ->setRules(array_merge(static::$fullhausRules, [
+                'FULLHAUS/array_spacing' => true,
+            ]));
         $static->getFinder()
             ->exclude(
                 [
