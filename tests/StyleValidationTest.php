@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace FULLHAUS\CodingStandards\Tests;
 
 use FULLHAUS\CodingStandards\CsFixerConfig;
+use FULLHAUS\CodingStandards\Fixer\ArraySpacingFixer;
 use PhpCsFixer\Fixer\FixerInterface;
 use PhpCsFixer\FixerFactory;
 use PhpCsFixer\RuleSet\RuleSet;
@@ -31,6 +32,7 @@ class StyleValidationTest extends TestCase
         $this->config = CsFixerConfig::create();
         $this->fixerFactory = new FixerFactory();
         $this->fixerFactory->registerBuiltInFixers();
+        $this->fixerFactory->registerCustomFixers([ new ArraySpacingFixer() ]);
 
         // Verwende die Rules aus der tatsächlichen Config
         $ruleSet = new RuleSet($this->config->getRules());
@@ -48,7 +50,7 @@ $array = array(1, 2, 3);
 ';
         $expected = '<?php
 
-$array = [1, 2, 3];
+$array = [ 1, 2, 3 ];
 ';
 
         $result = $this->applyFullhausConfig($input);
@@ -216,7 +218,7 @@ list($a, $b) = [1, 2];
 ';
         $expected = '<?php
 
-[$a, $b] = [1, 2];
+[$a, $b] = [ 1, 2 ];
 ';
 
         $result = $this->applyFullhausConfig($input);
@@ -303,6 +305,76 @@ declare(strict_types = 1);
         $expected = '<?php
 
 declare(strict_types=1);
+';
+
+        $result = $this->applyFullhausConfig($input);
+        self::assertSame($expected, $result);
+    }
+
+    /**
+     * Test array spacing adds spaces inside brackets
+     */
+    public function testArraySpacing(): void
+    {
+        $input = '<?php
+
+$array = [1, 2, 3];
+$another = [\'a\', \'b\'];
+$tooManySpaces = [  \'a\', \'b\'  ];
+$onlySpacesAtEnd = [\'a\', \'b\'  ];
+$empty = [];
+';
+        $expected = '<?php
+
+$array = [ 1, 2, 3 ];
+$another = [ \'a\', \'b\' ];
+$tooManySpaces = [ \'a\', \'b\' ];
+$onlySpacesAtEnd = [ \'a\', \'b\' ];
+$empty = [];
+';
+
+        $result = $this->applyFullhausConfig($input);
+        self::assertSame($expected, $result);
+    }
+
+    /**
+     * Test array spacing with array() syntax
+     */
+    public function testArraySpacingWithArraySyntax(): void
+    {
+        $input = '<?php
+
+$array = array(1, 2, 3);
+';
+        $expected = '<?php
+
+$array = [ 1, 2, 3 ];
+';
+
+        $result = $this->applyFullhausConfig($input);
+        self::assertSame($expected, $result);
+    }
+
+    /**
+     * Test array spacing does not affect multiline arrays
+     */
+    public function testArraySpacingMultiline(): void
+    {
+        $input = '<?php
+
+$array = [
+    1,
+    2,
+    3,
+];
+';
+        $expected = '<?php
+
+$array = [
+    1,
+    2,
+    3,
+];
 ';
 
         $result = $this->applyFullhausConfig($input);
