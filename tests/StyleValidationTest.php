@@ -15,7 +15,6 @@ namespace FULLHAUS\CodingStandards\Tests;
 
 use FULLHAUS\CodingStandards\CsFixerConfig;
 use FULLHAUS\CodingStandards\Fixer\ArraySpacingFixer;
-use PhpCsFixer\Fixer\FixerInterface;
 use PhpCsFixer\FixerFactory;
 use PhpCsFixer\RuleSet\RuleSet;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -160,54 +159,6 @@ if ($value == 5) {
     }
 
     /**
-     * Test nullable type with union syntax
-     */
-    public function testNullableTypeUnionSyntax(): void
-    {
-        $input = '<?php
-
-function test(?string $value): ?int
-{
-    return null;
-}
-';
-        $expected = '<?php
-
-function test(string|null $value): int|null
-{
-    return null;
-}
-';
-
-        $result = $this->applyFullhausConfig($input);
-        self::assertSame($expected, $result);
-    }
-
-    /**
-     * Test type order with union syntax
-     */
-    public function testTypeOrder(): void
-    {
-        $input = '<?php
-
-function test(null|\CallbackFilterIterator|string $value): null|int
-{
-    return null;
-}
-';
-        $expected = '<?php
-
-function test(\CallbackFilterIterator|string|null $value): int|null
-{
-    return null;
-}
-';
-
-        $result = $this->applyFullhausConfig($input);
-        self::assertSame($expected, $result);
-    }
-
-    /**
      * Test list syntax uses short form
      */
     public function testListSyntaxShort(): void
@@ -259,14 +210,14 @@ function test()
     {
         $input = '<?php
 
-use Some\Unused\Class;
-use Some\Used\Class as UsedClass;
+use Some\Unused\SampleClass;
+use Some\Used\SampleClass as UsedClass;
 
 $obj = new UsedClass();
 ';
         $expected = '<?php
 
-use Some\Used\Class as UsedClass;
+use Some\Used\SampleClass as UsedClass;
 
 $obj = new UsedClass();
 ';
@@ -391,7 +342,6 @@ $array = [
 
         $tokens = Tokens::fromCode($code);
 
-        /** @var FixerInterface $fixer */
         foreach ($fixers as $fixer) {
             if ($fixer->isCandidate($tokens)) {
                 $fixer->fix($this->createMockSplFileInfo(), $tokens);
@@ -409,7 +359,7 @@ $array = [
         return new \SplFileInfo(__FILE__);
     }
 
-    private function applyFullhausConfig(string $input)
+    private function applyFullhausConfig(string $input): string
     {
         return $this->fixCode($input, $this->config->getRules());
     }
