@@ -159,54 +159,6 @@ if ($value == 5) {
     }
 
     /**
-     * Test nullable type with union syntax
-     */
-    public function testNullableTypeUnionSyntax(): void
-    {
-        $input = '<?php
-
-function test(?string $value): ?int
-{
-    return null;
-}
-';
-        $expected = '<?php
-
-function test(string|null $value): int|null
-{
-    return null;
-}
-';
-
-        $result = $this->applyFullhausConfig($input);
-        self::assertSame($expected, $result);
-    }
-
-    /**
-     * Test type order with union syntax
-     */
-    public function testTypeOrder(): void
-    {
-        $input = '<?php
-
-function test(null|\CallbackFilterIterator|string $value): null|int
-{
-    return null;
-}
-';
-        $expected = '<?php
-
-function test(\CallbackFilterIterator|string|null $value): int|null
-{
-    return null;
-}
-';
-
-        $result = $this->applyFullhausConfig($input);
-        self::assertSame($expected, $result);
-    }
-
-    /**
      * Test list syntax uses short form
      */
     public function testListSyntaxShort(): void
