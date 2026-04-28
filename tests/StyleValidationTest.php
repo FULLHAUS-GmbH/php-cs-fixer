@@ -15,7 +15,6 @@ namespace FULLHAUS\CodingStandards\Tests;
 
 use FULLHAUS\CodingStandards\CsFixerConfig;
 use FULLHAUS\CodingStandards\Fixer\ArraySpacingFixer;
-use PhpCsFixer\Fixer\FixerInterface;
 use PhpCsFixer\FixerFactory;
 use PhpCsFixer\RuleSet\RuleSet;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -391,7 +390,6 @@ $array = [
 
         $tokens = Tokens::fromCode($code);
 
-        /** @var FixerInterface $fixer */
         foreach ($fixers as $fixer) {
             if ($fixer->isCandidate($tokens)) {
                 $fixer->fix($this->createMockSplFileInfo(), $tokens);
