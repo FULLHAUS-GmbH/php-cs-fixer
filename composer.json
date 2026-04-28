@@ -1,17 +1,17 @@
 {
     "name": "fullhaus/php-cs-fixer",
     "description": "Default PHP-CS-Fixer configuration for FULLHAUS projects.",
-    "type": "library",
-    "homepage" : "https://www.fullhaus.de/",
-    "readme": "README.md",
     "license": "MIT",
+    "type": "library",
+    "readme": "README.md",
+    "homepage": "https://www.fullhaus.de/",
     "require": {
-        "friendsofphp/php-cs-fixer": "^3.68.1",
-        "php": ">=8.0"
+        "php": ">=8.0",
+        "friendsofphp/php-cs-fixer": "^3.95.1"
     },
     "require-dev": {
-        "ergebnis/composer-normalize": "^2.45",
-        "phpunit/phpunit": "^10.0|^11.0"
+        "ergebnis/composer-normalize": "^2.51",
+        "phpunit/phpunit": ">=9.6.34"
     },
     "autoload": {
         "psr-4": {
@@ -23,15 +23,15 @@
             "FULLHAUS\\CodingStandards\\Tests\\": "tests/"
         }
     },
-    "scripts": {
-        "format": "php-cs-fixer",
-        "test": "phpunit",
-        "test:coverage": "phpunit --coverage-html coverage/"
-    },
     "config": {
         "allow-plugins": {
             "ergebnis/composer-normalize": true
         },
         "lock": false
+    },
+    "scripts": {
+        "format": "php-cs-fixer",
+        "test": "phpunit",
+        "test:coverage": "phpunit --coverage-html coverage/"
     }
 }
