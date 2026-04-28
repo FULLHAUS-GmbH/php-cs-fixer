@@ -256,7 +256,7 @@ final class HeaderCommentFixer extends AbstractFixer implements ConfigurableFixe
         }
 
         // Look for the first comment after our search start point
-        for ($i = $searchStart; $i < count($tokens); $i++) {
+        for ($i = $searchStart, $iMax = count($tokens); $i < $iMax; $i++) {
             $token = $tokens[$i];
 
             if ($token->isWhitespace()) {
