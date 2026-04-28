@@ -258,14 +258,14 @@ function test()
     {
         $input = '<?php
 
-use Some\Unused\Class;
-use Some\Used\Class as UsedClass;
+use Some\Unused\SampleClass;
+use Some\Used\SampleClass as UsedClass;
 
 $obj = new UsedClass();
 ';
         $expected = '<?php
 
-use Some\Used\Class as UsedClass;
+use Some\Used\SampleClass as UsedClass;
 
 $obj = new UsedClass();
 ';
