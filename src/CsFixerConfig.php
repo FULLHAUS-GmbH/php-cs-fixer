@@ -315,7 +315,7 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
      * @param string|array<string> $location Where to place the header (default: 'after_declare_strict')
      *                                       Can be a string or array. When using array, last matching position wins.
      */
-    public function enableHeaderComment(string $header, string|array $location = 'after_declare_strict'): static
+    public function enableHeaderComment(string $header, array|string $location = 'after_declare_strict'): static
     {
         return $this->setHeaderComment([
             'enabled' => true,
@@ -326,7 +326,7 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
         ]);
     }
 
-    public function enableHeaderTemplateComment(string $headerTemplate, array $packagesPath = [], string|array $location = 'after_declare_strict'): static
+    public function enableHeaderTemplateComment(string $headerTemplate, array $packagesPath = [], array|string $location = 'after_declare_strict'): static
     {
         return $this->setHeaderComment([
             'enabled' => true,

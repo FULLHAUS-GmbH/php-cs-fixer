@@ -135,7 +135,7 @@ final class HeaderCommentFixer extends AbstractFixer implements ConfigurableFixe
                     ->setAllowedTypes([ 'string' ])
                     ->setDefault('')
                     ->getOption(),
-            ]
+            ],
         );
     }
 
@@ -174,6 +174,7 @@ final class HeaderCommentFixer extends AbstractFixer implements ConfigurableFixe
         if ($token->isGivenKind(T_COMMENT) || $token->isGivenKind(T_DOC_COMMENT)) {
             // Remove whitespace before the header comment if present
             $prevIndex = $headerStart - 1;
+
             if ($prevIndex >= 0 && $tokens[$prevIndex]->isWhitespace()) {
                 $tokens->clearAt($prevIndex);
             }
@@ -183,6 +184,7 @@ final class HeaderCommentFixer extends AbstractFixer implements ConfigurableFixe
 
             // Remove whitespace after the header comment
             $nextIndex = $headerStart + 1;
+
             while ($nextIndex < count($tokens) && $tokens[$nextIndex]->isWhitespace()) {
                 $tokens->clearAt($nextIndex);
                 $nextIndex++;
@@ -190,10 +192,11 @@ final class HeaderCommentFixer extends AbstractFixer implements ConfigurableFixe
         }
     }
 
-    private function findInsertionPoint(Tokens $tokens): ?int
+    private function findInsertionPoint(Tokens $tokens): int|null
     {
         // Start from -1 since getNextTokenOfKind searches from index+1
         $openTagIndex = 0;
+
         if (!$tokens[0]->isGivenKind(T_OPEN_TAG)) {
             return null;
         }
@@ -201,6 +204,7 @@ final class HeaderCommentFixer extends AbstractFixer implements ConfigurableFixe
         if ($this->location === 'after_open') {
             // Insert right after the opening tag
             $nextIndex = $openTagIndex + 1;
+
             // Skip any existing whitespace
             while ($nextIndex < count($tokens) && $tokens[$nextIndex]->isWhitespace()) {
                 $nextIndex++;
@@ -219,6 +223,7 @@ final class HeaderCommentFixer extends AbstractFixer implements ConfigurableFixe
             if ($semicolonIndex !== null) {
                 // Skip whitespace after semicolon to find insertion point
                 $nextIndex = $semicolonIndex + 1;
+
                 while ($nextIndex < count($tokens) && $tokens[$nextIndex]->isWhitespace()) {
                     $nextIndex++;
                 }
@@ -229,6 +234,7 @@ final class HeaderCommentFixer extends AbstractFixer implements ConfigurableFixe
 
         // Fallback to after open tag if no declare found
         $nextIndex = $openTagIndex + 1;
+
         while ($nextIndex < count($tokens) && $tokens[$nextIndex]->isWhitespace()) {
             $nextIndex++;
         }
@@ -236,9 +242,10 @@ final class HeaderCommentFixer extends AbstractFixer implements ConfigurableFixe
         return $nextIndex;
     }
 
-    private function findExistingHeaderStart(Tokens $tokens): ?int
+    private function findExistingHeaderStart(Tokens $tokens): int|null
     {
         $openTagIndex = 0;
+
         if (!$tokens[0]->isGivenKind(T_OPEN_TAG)) {
             return null;
         }
@@ -248,8 +255,10 @@ final class HeaderCommentFixer extends AbstractFixer implements ConfigurableFixe
 
         // Skip past declare if present
         $declareIndex = $tokens->getNextTokenOfKind($openTagIndex, [ [ T_DECLARE ] ]);
+
         if ($declareIndex !== null) {
             $semicolonIndex = $tokens->getNextTokenOfKind($declareIndex, [ ';' ]);
+
             if ($semicolonIndex !== null) {
                 $searchStart = $semicolonIndex + 1;
             }
@@ -266,6 +275,7 @@ final class HeaderCommentFixer extends AbstractFixer implements ConfigurableFixe
             if ($token->isGivenKind([ T_COMMENT, T_DOC_COMMENT ])) {
                 // Check if this looks like a header comment (multi-line block comment)
                 $content = $token->getContent();
+
                 if (str_starts_with($content, '/*') && !str_starts_with($content, '/**')) {
                     return $i;
                 }
@@ -292,6 +302,7 @@ final class HeaderCommentFixer extends AbstractFixer implements ConfigurableFixe
         $commentStart = $this->commentType === 'PHPDoc' ? "/**\n" : "/*\n";
 
         $comment = $commentStart;
+
         foreach ($lines as $line) {
             $comment .= ' * ' . $line . "\n";
         }
@@ -313,6 +324,7 @@ final class HeaderCommentFixer extends AbstractFixer implements ConfigurableFixe
         }
 
         $filePath = $file->getRealPath();
+
         if ($filePath === false) {
             return $this->headerComment;
         }
@@ -334,7 +346,7 @@ final class HeaderCommentFixer extends AbstractFixer implements ConfigurableFixe
     /**
      * Find the package name from composer.json for a given file path.
      */
-    private function findPackageNameForFile(string $filePath): ?string
+    private function findPackageNameForFile(string $filePath): string|null
     {
         foreach ($this->packagesPath as $packagesRoot) {
             // Normalize paths
@@ -370,7 +382,7 @@ final class HeaderCommentFixer extends AbstractFixer implements ConfigurableFixe
      * Read the package name from composer.json in the given directory.
      * Results are cached to avoid repeated file reads.
      */
-    private function getPackageNameFromComposer(string $packageDir): ?string
+    private function getPackageNameFromComposer(string $packageDir): string|null
     {
         // Check cache first
         if (isset($this->composerCache[$packageDir])) {
@@ -386,6 +398,7 @@ final class HeaderCommentFixer extends AbstractFixer implements ConfigurableFixe
         }
 
         $composerJson = file_get_contents($composerJsonPath);
+
         if ($composerJson === false) {
             $this->composerCache[$packageDir] = null;
 
@@ -393,6 +406,7 @@ final class HeaderCommentFixer extends AbstractFixer implements ConfigurableFixe
         }
 
         $composerData = json_decode($composerJson, true);
+
         if (!is_array($composerData) || !isset($composerData['name'])) {
             $this->composerCache[$packageDir] = null;
 
@@ -437,7 +451,7 @@ final class HeaderCommentFixer extends AbstractFixer implements ConfigurableFixe
         // Fix lines after header comment
         if (
             ($this->separate === 'both' || $this->separate === 'bottom')
-            && null !== $tokens->getNextMeaningfulToken($headerIndex)
+            && $tokens->getNextMeaningfulToken($headerIndex) !== null
         ) {
             $expectedLineCount = 2;
         } else {
@@ -465,7 +479,7 @@ final class HeaderCommentFixer extends AbstractFixer implements ConfigurableFixe
                     [
                         T_WHITESPACE,
                         preg_replace("/^(?:\\r\\n|\\n|\\r){{$newLinesToRemove}}/", '', $content),
-                    ]
+                    ],
                 );
             }
         }
@@ -490,4 +504,3 @@ final class HeaderCommentFixer extends AbstractFixer implements ConfigurableFixe
         }
     }
 }
-
