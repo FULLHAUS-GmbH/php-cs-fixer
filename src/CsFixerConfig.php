@@ -241,7 +241,7 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
         parent::__construct($name);
     }
 
-    public static function create(): static
+    public static function create(): CsFixerConfigInterface
     {
         $static = new static();
         $static
@@ -274,7 +274,7 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
     /**
      * @param array<string, mixed> $rules
      */
-    public function addRules(array $rules): static
+    public function addRules(array $rules): CsFixerConfigInterface
     {
         $rules = array_replace_recursive($this->getRules(), $rules);
         $this->setRules($rules);
