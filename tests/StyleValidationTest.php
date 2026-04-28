@@ -407,7 +407,7 @@ $array = [
         return new \SplFileInfo(__FILE__);
     }
 
-    private function applyFullhausConfig(string $input)
+    private function applyFullhausConfig(string $input): string
     {
         return $this->fixCode($input, $this->config->getRules());
     }
