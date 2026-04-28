@@ -184,7 +184,7 @@ function test(string|null $value): int|null
     /**
      * Test type order with union syntax
      */
-    public function testNullableOrder(): void
+    public function testTypeOrder(): void
     {
         $input = '<?php
 
