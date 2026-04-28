@@ -15,5 +15,5 @@ namespace FULLHAUS\CodingStandards;
 
 interface CsFixerConfigInterface
 {
-    public function __construct(string $name);
+    public static function create(): static;
 }
